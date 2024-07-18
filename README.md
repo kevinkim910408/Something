@@ -1,1 +1,1 @@
-# next_template
+# 3d motion grapic practice
