@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #fff;
+  --color-secondary: 172 172 172;
+
+  --color-black: #0e111b;
+  --color-white: #fff;
+}
+
+body {
+  line-height: 1.4;
+
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+@layer base {
+}
