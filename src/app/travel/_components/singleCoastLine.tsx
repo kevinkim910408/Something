@@ -1,4 +1,4 @@
-import { convertCoordinateToVector } from "@/utils/convertCoordinateToVector";
+import { convertCoordinateToVector } from "@/utils/numbers";
 import * as THREE from "three";
 
 interface SingleCoastLineProps {

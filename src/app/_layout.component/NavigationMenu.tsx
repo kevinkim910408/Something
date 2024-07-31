@@ -1,0 +1,32 @@
+import { Drawer } from "@/components/ui/drawer";
+import { navigation } from "@/const";
+import Link from "next/link";
+import React from "react";
+
+interface NavigationMenuProps {
+  isMenuOpen: boolean;
+  closeMenu: () => void;
+}
+
+const NavigationMenu = ({ isMenuOpen, closeMenu }: NavigationMenuProps) => {
+  return (
+    <Drawer
+      open={isMenuOpen}
+      onClose={closeMenu}
+      openFrom="left"
+      heading="Menu"
+    >
+      <div className="px-4 py-2">
+        {navigation.map((navi) => {
+          return (
+            <Link key={navi.name} href={navi.to}>
+              - {navi.title}
+            </Link>
+          );
+        })}
+      </div>
+    </Drawer>
+  );
+};
+
+export default NavigationMenu;

@@ -10,6 +10,9 @@ const config = {
           DEFAULT: "var(--color-secondary) ",
         },
       },
+      minHeight: {
+        content: "calc(100vh - 100px)",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

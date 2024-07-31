@@ -1,3 +1,4 @@
+import { Layout } from "./_layout.component/Layout";
 import "./_style/global.css";
 import * as PROVIDER from "@/providers";
 import "@radix-ui/themes/styles.css";
@@ -27,7 +28,9 @@ export default function RootLayout({
       <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
       <body>
         <PROVIDER.RecoilRootProvider>
-          <PROVIDER.ThemeRadixProvider>{children}</PROVIDER.ThemeRadixProvider>
+          <PROVIDER.ThemeRadixProvider>
+            <Layout>{children}</Layout>
+          </PROVIDER.ThemeRadixProvider>
         </PROVIDER.RecoilRootProvider>
       </body>
     </html>
