@@ -16,10 +16,15 @@ const NavigationMenu = ({ isMenuOpen, closeMenu }: NavigationMenuProps) => {
       openFrom="left"
       heading="Menu"
     >
-      <div className="px-4 py-2">
+      <div className="px-4 py-2 flex flex-col">
         {navigation.map((navi) => {
           return (
-            <Link key={navi.name} href={navi.to}>
+            <Link
+              key={navi.name}
+              href={navi.to}
+              className="py-2"
+              onClick={closeMenu}
+            >
               - {navi.title}
             </Link>
           );

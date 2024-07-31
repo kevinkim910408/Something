@@ -6,11 +6,11 @@ import React from "react";
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div>
+    <>
       <Header />
       <div className="min-h-content">{children}</div>
       <Footer />
-    </div>
+    </>
   );
 };
 
