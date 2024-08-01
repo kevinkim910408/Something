@@ -1,0 +1,87 @@
+import { cityCoordinates } from "@/const";
+import { convertCoordinateToVector } from "@/utils";
+import { useLoader } from "@react-three/fiber";
+import { useState } from "react";
+import {
+  DoubleSide,
+  Material,
+  MeshBasicMaterial,
+  MeshStandardMaterial,
+} from "three";
+import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
+
+export default function Pins({ radius }: { radius: number }) {
+  const pin = useLoader(OBJLoader, "./starPin.obj");
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  const handlePointerOver = (index: number) => {
+    setHoveredIndex(index);
+  };
+
+  const handlePointerOut = () => {
+    setHoveredIndex(null);
+  };
+
+  const handlePointerClick = (cityName: string) => {
+    alert(cityName);
+  };
+
+  const cloneMaterial = (material: Material | Material[]) => {
+    if (Array.isArray(material)) {
+      return material.map((mat) => mat.clone());
+    } else {
+      return material.clone();
+    }
+  };
+
+  return (
+    <group>
+      {cityCoordinates.map((info, index) => {
+        const position = convertCoordinateToVector(
+          [info.long, info.lat],
+          radius,
+        );
+        const isHovered = index === hoveredIndex;
+        const color = isHovered ? 0xff0000 : 0x000000;
+        const pinClone = pin.clone();
+
+        pinClone.traverse((obj: any) => {
+          if (obj.isMesh) {
+            obj.material = cloneMaterial(obj.material);
+            if (Array.isArray(obj.material)) {
+              obj.material.forEach((mat: Material) => {
+                if (isColorMaterial(mat)) {
+                  mat.color.set(color);
+                  mat.side = DoubleSide;
+                }
+              });
+            } else {
+              if (isColorMaterial(obj.material)) {
+                obj.material.color.set(color);
+                obj.material.side = DoubleSide;
+              }
+            }
+          }
+        });
+
+        return (
+          <primitive
+            position={position}
+            scale={0.1}
+            object={pinClone}
+            key={index}
+            onPointerOver={() => handlePointerOver(index)}
+            onPointerOut={handlePointerOut}
+            onClick={() => handlePointerClick(info.cityName)}
+          />
+        );
+      })}
+    </group>
+  );
+}
+
+function isColorMaterial(
+  material: Material,
+): material is MeshBasicMaterial | MeshStandardMaterial {
+  return (material as MeshBasicMaterial).color !== undefined;
+}

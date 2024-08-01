@@ -1,4 +1,5 @@
 import CoastLine from "./Coastline";
+import Pins from "./Pin";
 import React from "react";
 
 const EarthComponent = ({ radius }: { radius: number }) => {
@@ -13,6 +14,7 @@ const EarthComponent = ({ radius }: { radius: number }) => {
           roughness={0.5}
         />
         <CoastLine radius={radius} />
+        <Pins radius={radius} />
       </mesh>
     </>
   );
