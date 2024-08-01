@@ -9,7 +9,7 @@ const EarthComponent = ({ radius }: { radius: number }) => {
         <sphereGeometry args={[radius, 32, 32]} />
         <meshStandardMaterial
           color="white"
-          emissive="white"
+          emissive="#1E90FF"
           metalness={0.5}
           roughness={0.5}
         />
