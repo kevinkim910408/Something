@@ -27,7 +27,7 @@ export default function Home() {
   return (
     <>
       <div className="w-screen h-screen">
-        <Canvas camera={{ fov: 30, near: 0.1, far: 1000, position: [0, 0, 4] }}>
+        <Canvas camera={{ fov: 25, near: 0.1, far: 1000, position: [1, 4, 4] }}>
           <FixedLight />
           <EarthCanvas />
           <OrbitControls enableZoom={false} />
