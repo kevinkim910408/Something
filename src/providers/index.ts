@@ -1,2 +1,2 @@
 export { RecoilRootProvider } from "./recoil-provider";
-export { ThemeRadixProvider } from "./theme-provider";
+export { ThemeProvider } from "./theme-provider";

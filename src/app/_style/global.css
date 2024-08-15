@@ -12,9 +12,6 @@
 
 body {
   line-height: 1.4;
-
-  background-color: var(--color-black);
-  color: var(--color-white);
 }
 
 @layer base {

@@ -1,6 +1,7 @@
 "use client";
 
 import NavigationMenu from "../_layout.component/NavigationMenu";
+import { ModeToggle } from "./ModeTogle";
 import { useDrawer } from "@/components/ui/drawer";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import React from "react";
@@ -22,10 +23,11 @@ export const Header = () => {
     closeDrawer: closeMenu,
   } = useDrawer();
   return (
-    <div className="h-14 p-2">
+    <div className="h-14 p-2 flex justify-between">
       <button onClick={openMenu}>
         <HamburgerMenuIcon width={50} height={50} />
       </button>
+      <ModeToggle />
       <NavigationMenu isMenuOpen={isMenuOpen} closeMenu={closeMenu} />
     </div>
   );

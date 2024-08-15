@@ -1,7 +1,6 @@
 import { Layout } from "./_layout.component/Layout";
 import "./_style/global.css";
-import * as PROVIDER from "@/providers";
-import "@radix-ui/themes/styles.css";
+import { ThemeProvider, RecoilRootProvider } from "@/providers";
 import { Metadata } from "next";
 import "tailwindcss/tailwind.css";
 
@@ -27,11 +26,16 @@ export default function RootLayout({
       <meta name="msapplication-TileColor" content="#FF98BA" />
       <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
       <body>
-        <PROVIDER.RecoilRootProvider>
-          <PROVIDER.ThemeRadixProvider>
+        <RecoilRootProvider>
+          <ThemeProvider
+            attribute="class"
+            enableSystem
+            defaultTheme="system"
+            disableTransitionOnChange
+          >
             <Layout>{children}</Layout>
-          </PROVIDER.ThemeRadixProvider>
-        </PROVIDER.RecoilRootProvider>
+          </ThemeProvider>
+        </RecoilRootProvider>
       </body>
     </html>
   );
