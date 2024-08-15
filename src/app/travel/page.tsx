@@ -1,6 +1,7 @@
 "use client";
 
 import { EarthCanvas } from "./_components/EarthCanvas";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { OrbitControls } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useRef } from "react";
@@ -26,13 +27,24 @@ function FixedLight() {
 export default function Home() {
   return (
     <>
-      <div className="w-screen h-screen">
-        <Canvas camera={{ fov: 25, near: 0.1, far: 1000, position: [1, 4, 4] }}>
-          <FixedLight />
-          <EarthCanvas />
-          <OrbitControls enableZoom={false} />
-        </Canvas>
-      </div>
+      <Tabs defaultValue="2d" className="flex flex-col items-center">
+        <TabsList className="grid max-w-[400px] w-full grid-cols-2">
+          <TabsTrigger value="2d">2D</TabsTrigger>
+          <TabsTrigger value="3d">3D</TabsTrigger>
+        </TabsList>
+        <TabsContent value="2d"></TabsContent>
+        <TabsContent value="3d">
+          <div className="h-screen w-screen">
+            <Canvas
+              camera={{ fov: 25, near: 0.1, far: 1000, position: [1, 4, 4] }}
+            >
+              <FixedLight />
+              <EarthCanvas />
+              <OrbitControls enableZoom={false} />
+            </Canvas>
+          </div>
+        </TabsContent>
+      </Tabs>
     </>
   );
 }

@@ -1,6 +1,6 @@
-import { IconCaret, IconClose } from "./Icon";
 import { Heading } from "./Text";
 import { Dialog, Transition } from "@headlessui/react";
+import { Cross1Icon, ChevronLeftIcon } from "@radix-ui/react-icons";
 import { Fragment, useState } from "react";
 
 /**
@@ -83,13 +83,7 @@ export function Drawer({
                         onClick={handleBack}
                         data-test="close-cart"
                       >
-                        <IconCaret
-                          strokeWidth="1"
-                          viewBox="4 4 12 12"
-                          fill="none"
-                          className="rotate-90 h-5 w-5"
-                          aria-label="Back panel"
-                        />
+                        <ChevronLeftIcon width={20} height={20} />
                       </button>
                     ) : null}
                     {heading !== null ? (
@@ -109,7 +103,7 @@ export function Drawer({
                       onClick={handleClose}
                       data-test="close-cart"
                     >
-                      <IconClose aria-label="Close panel" />
+                      <Cross1Icon width={30} height={30} />
                     </button>
                   </header>
                   {children}

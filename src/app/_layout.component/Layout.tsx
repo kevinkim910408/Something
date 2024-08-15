@@ -2,6 +2,7 @@
 
 import NavigationMenu from "../_layout.component/NavigationMenu";
 import { useDrawer } from "@/components/ui/drawer";
+import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import React from "react";
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
@@ -21,8 +22,10 @@ export const Header = () => {
     closeDrawer: closeMenu,
   } = useDrawer();
   return (
-    <div className="h-14">
-      <button onClick={openMenu}>ho</button>
+    <div className="h-14 p-2">
+      <button onClick={openMenu}>
+        <HamburgerMenuIcon width={50} height={50} />
+      </button>
       <NavigationMenu isMenuOpen={isMenuOpen} closeMenu={closeMenu} />
     </div>
   );
