@@ -3,6 +3,7 @@
 import { EarthCanvas, FixedLight } from ".";
 import { FadeInOut } from "@/components/animation";
 import { travelCityNameState, travelPolaroidState } from "@/recoils";
+import { Cross1Icon } from "@radix-ui/react-icons";
 import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -14,10 +15,13 @@ export const Tab3D = () => {
   return (
     <div className="h-screen w-screen">
       <FadeInOut isVisible={polaroidOpen}>
-        <div
-          className={`bg-red-300 ${polaroidOpen ? "h-96" : ""}`}
-          onClick={() => setPolaroidOpen(false)}
-        ></div>
+        <div className={`bg-red-300 ${polaroidOpen ? "h-96 w-11/12" : ""}`}>
+          <Cross1Icon
+            onClick={() => setPolaroidOpen(false)}
+            width={30}
+            height={30}
+          />
+        </div>
       </FadeInOut>
       <Canvas camera={{ fov: 25, near: 0.1, far: 1000, position: [1, 4, 4] }}>
         <FixedLight />
