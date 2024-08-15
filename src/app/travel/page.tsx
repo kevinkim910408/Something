@@ -1,28 +1,8 @@
 "use client";
 
-import { EarthCanvas } from "./_components/EarthCanvas";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { OrbitControls } from "@react-three/drei";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { useRef, useState } from "react";
-import { DirectionalLight } from "three";
-import * as THREE from "three";
-
-function FixedLight() {
-  const lightRef = useRef<DirectionalLight>(null);
-  const { camera } = useThree();
-
-  useFrame(() => {
-    if (lightRef.current) {
-      lightRef.current.position.copy(camera.position);
-      lightRef.current.position.add(
-        camera.getWorldDirection(new THREE.Vector3()).multiplyScalar(3),
-      );
-    }
-  });
-
-  return <directionalLight ref={lightRef} />;
-}
+import { Tab2D, Tab3D } from "./_components";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui";
+import { useState } from "react";
 
 export default function Home() {
   const [selectedTab, setSelectedTab] = useState("2d");
@@ -39,18 +19,13 @@ export default function Home() {
             <TabsTrigger value="3d">3D</TabsTrigger>
           </TabsList>
         </div>
-        <TabsContent value="2d"></TabsContent>
-        {selectedTab === "3d" && (
+        {selectedTab === "2d" ? (
+          <TabsContent value="2d">
+            <Tab2D />
+          </TabsContent>
+        ) : (
           <TabsContent value="3d">
-            <div className="h-screen w-screen">
-              <Canvas
-                camera={{ fov: 25, near: 0.1, far: 1000, position: [1, 4, 4] }}
-              >
-                <FixedLight />
-                <EarthCanvas />
-                <OrbitControls enableZoom={false} />
-              </Canvas>
-            </div>
+            <Tab3D />
           </TabsContent>
         )}
       </Tabs>

@@ -1,3 +1,4 @@
 export const recoilConfigKeys = {
-  event: "event",
+  TRAVEL_POLAROID: "polaroid",
+  TRAVEL_CITYNAME: "cityName",
 } as const;

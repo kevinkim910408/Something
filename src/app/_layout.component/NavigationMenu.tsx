@@ -1,4 +1,4 @@
-import { Drawer } from "@/components/ui/drawer";
+import { Drawer } from "@/components/ui";
 import { navigation } from "@/const";
 import Link from "next/link";
 import React from "react";

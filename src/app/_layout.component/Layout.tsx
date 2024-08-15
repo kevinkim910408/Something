@@ -2,7 +2,7 @@
 
 import NavigationMenu from "../_layout.component/NavigationMenu";
 import { ModeToggle } from "./ModeTogle";
-import { useDrawer } from "@/components/ui/drawer";
+import { useDrawer } from "@/components/ui";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import React from "react";
 

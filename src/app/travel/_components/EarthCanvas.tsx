@@ -1,4 +1,4 @@
-import { Earth } from "./Earth";
+import { Earth } from ".";
 import { CONSTANT } from "@/const";
 
 export const EarthCanvas = () => {

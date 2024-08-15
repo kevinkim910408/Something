@@ -1,5 +1,4 @@
-import CoastLine from "./Coastline";
-import Pins from "./Pin";
+import { CoastLine, Pins } from ".";
 import React from "react";
 
 const EarthComponent = ({ radius }: { radius: number }) => {

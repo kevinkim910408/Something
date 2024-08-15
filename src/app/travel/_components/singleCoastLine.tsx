@@ -7,11 +7,11 @@ interface SingleCoastLineProps {
   material: any;
 }
 
-export default function SingleCoastLine({
+export const SingleCoastLine = ({
   coordinates,
   radius,
   material,
-}: SingleCoastLineProps) {
+}: SingleCoastLineProps) => {
   const getBufferGeometry = (
     coordinates: Array<[number, number]>,
     radius: number,
@@ -44,4 +44,4 @@ export default function SingleCoastLine({
   const line = new THREE.Line(_geometry, _material);
 
   return <primitive object={line} position={[0, 0, 0]} />;
-}
+};

@@ -1,7 +1,9 @@
 import { cityCoordinates } from "@/const";
+import { travelCityNameState, travelPolaroidState } from "@/recoils";
 import { convertCoordinateToVector } from "@/utils";
 import { useLoader } from "@react-three/fiber";
 import { useState } from "react";
+import { useSetRecoilState } from "recoil";
 import {
   DoubleSide,
   Material,
@@ -10,9 +12,13 @@ import {
 } from "three";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 
-export default function Pins({ radius }: { radius: number }) {
-  const pin = useLoader(OBJLoader, "./starPin.obj");
+export const Pins = ({ radius }: { radius: number }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  const pin = useLoader(OBJLoader, "./starPin.obj");
+
+  const setPolaroidOpen = useSetRecoilState(travelPolaroidState);
+  const setCityName = useSetRecoilState(travelCityNameState);
 
   const handlePointerOver = (index: number) => {
     setHoveredIndex(index);
@@ -23,7 +29,8 @@ export default function Pins({ radius }: { radius: number }) {
   };
 
   const handlePointerClick = (cityName: string) => {
-    alert(cityName);
+    setPolaroidOpen(true);
+    setCityName(cityName);
   };
 
   const cloneMaterial = (material: Material | Material[]) => {
@@ -78,7 +85,7 @@ export default function Pins({ radius }: { radius: number }) {
       })}
     </group>
   );
-}
+};
 
 function isColorMaterial(
   material: Material,
