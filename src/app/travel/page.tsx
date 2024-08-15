@@ -33,10 +33,12 @@ export default function Home() {
         className="flex flex-col items-center"
         onValueChange={(value) => setSelectedTab(value)}
       >
-        <TabsList className="grid max-w-[400px] w-11/12 grid-cols-2">
-          <TabsTrigger value="2d">2D</TabsTrigger>
-          <TabsTrigger value="3d">3D</TabsTrigger>
-        </TabsList>
+        <div className="hidden md:block">
+          <TabsList className="flex justify-center">
+            <TabsTrigger value="2d">2D</TabsTrigger>
+            <TabsTrigger value="3d">3D</TabsTrigger>
+          </TabsList>
+        </div>
         <TabsContent value="2d"></TabsContent>
         {selectedTab === "3d" && (
           <TabsContent value="3d">

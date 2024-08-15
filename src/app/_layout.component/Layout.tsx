@@ -24,10 +24,13 @@ export const Header = () => {
   } = useDrawer();
   return (
     <div className="h-14 p-2 flex justify-between">
-      <button onClick={openMenu}>
-        <HamburgerMenuIcon width={50} height={50} />
-      </button>
-      <ModeToggle />
+      <div>logo</div>
+      <div className="flex items-center gap-4">
+        <ModeToggle />
+        <button onClick={openMenu}>
+          <HamburgerMenuIcon width={40} height={40} />
+        </button>
+      </div>
       <NavigationMenu isMenuOpen={isMenuOpen} closeMenu={closeMenu} />
     </div>
   );

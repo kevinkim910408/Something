@@ -13,7 +13,7 @@ const NavigationMenu = ({ isMenuOpen, closeMenu }: NavigationMenuProps) => {
     <Drawer
       open={isMenuOpen}
       onClose={closeMenu}
-      openFrom="left"
+      openFrom="right"
       heading="Menu"
     >
       <div className="px-4 py-2 flex flex-col">
