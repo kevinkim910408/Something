@@ -1,6 +1,7 @@
 import { Heading } from "./Text";
 import { Dialog, Transition } from "@headlessui/react";
 import { Cross1Icon, ChevronLeftIcon } from "@radix-ui/react-icons";
+import { useTheme } from "next-themes";
 import { Fragment, useState } from "react";
 
 /**
@@ -26,6 +27,8 @@ export function Drawer({
   openFrom: "right" | "left";
   children: React.ReactNode;
 }) {
+  const { theme } = useTheme();
+
   const offScreen = {
     right: "translate-x-full",
     left: "-translate-x-full",
@@ -70,7 +73,7 @@ export function Drawer({
                 leaveFrom="translate-x-0"
                 leaveTo={offScreen[openFrom]}
               >
-                <Dialog.Panel className="w-screen max-w-lg text-left align-middle transition-all transform shadow-xl h-screen-dynamic bg-black">
+                <Dialog.Panel className="w-screen max-w-lg text-left align-middle transition-all transform shadow-xl h-screen-dynamic bg-white dark:bg-black">
                   <header
                     className={`sticky top-0 flex items-center px-6 h-14 sm:px-8 md:px-12 ${
                       heading ? "justify-between" : "justify-end"
@@ -103,7 +106,11 @@ export function Drawer({
                       onClick={handleClose}
                       data-test="close-cart"
                     >
-                      <Cross1Icon width={30} height={30} />
+                      {theme === "dark" ? (
+                        <Cross1Icon width={30} height={30} />
+                      ) : (
+                        <Cross1Icon width={30} height={30} color="black" />
+                      )}
                     </button>
                   </header>
                   {children}

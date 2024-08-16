@@ -8,9 +8,9 @@ import React from "react";
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex flex-col justify-between">
+    <div className="flex flex-col justify-between items-center">
       <Header />
-      <div className="min-h-content">{children}</div>
+      <div className="min-h-content max-w-[100rem] w-11/12">{children}</div>
       <Footer />
     </div>
   );
@@ -23,19 +23,26 @@ export const Header = () => {
     closeDrawer: closeMenu,
   } = useDrawer();
   return (
-    <div className="h-14 p-2 flex justify-between">
-      <div>logo</div>
-      <div className="flex items-center gap-4">
-        <ModeToggle />
-        <button onClick={openMenu}>
-          <HamburgerMenuIcon width={40} height={40} />
-        </button>
+    <div className="h-14 w-full flex justify-center">
+      <div className="max-w-[100rem] w-11/12 flex justify-between py-4">
+        <div>logo</div>
+        <div className="flex items-center gap-4">
+          <ModeToggle />
+          <button onClick={openMenu}>
+            <HamburgerMenuIcon width={40} height={40} />
+          </button>
+        </div>
       </div>
+
       <NavigationMenu isMenuOpen={isMenuOpen} closeMenu={closeMenu} />
     </div>
   );
 };
 
 export const Footer = () => {
-  return <div className="h-11">Footer</div>;
+  return (
+    <div className="h-11 w-full flex justify-center">
+      <div className="max-w-[100rem] w-11/12 flex justify-between py-4">dd</div>
+    </div>
+  );
 };
