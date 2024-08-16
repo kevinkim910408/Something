@@ -1,7 +1,6 @@
 import { Heading } from "./Text";
+import { Icon } from "./icon";
 import { Dialog, Transition } from "@headlessui/react";
-import { Cross1Icon, ChevronLeftIcon } from "@radix-ui/react-icons";
-import { useTheme } from "next-themes";
 import { Fragment, useState } from "react";
 
 /**
@@ -27,8 +26,6 @@ export function Drawer({
   openFrom: "right" | "left";
   children: React.ReactNode;
 }) {
-  const { theme } = useTheme();
-
   const offScreen = {
     right: "translate-x-full",
     left: "-translate-x-full",
@@ -86,7 +83,7 @@ export function Drawer({
                         onClick={handleBack}
                         data-test="close-cart"
                       >
-                        <ChevronLeftIcon width={20} height={20} />
+                        <Icon name="ChevronLeftIcon" />
                       </button>
                     ) : null}
                     {heading !== null ? (
@@ -106,11 +103,7 @@ export function Drawer({
                       onClick={handleClose}
                       data-test="close-cart"
                     >
-                      {theme === "dark" ? (
-                        <Cross1Icon width={30} height={30} />
-                      ) : (
-                        <Cross1Icon width={30} height={30} color="black" />
-                      )}
+                      <Icon name="Cross1Icon" />
                     </button>
                   </header>
                   {children}

@@ -2,8 +2,7 @@
 
 import NavigationMenu from "../_layout.component/NavigationMenu";
 import { ModeToggle } from "./ModeTogle";
-import { useDrawer } from "@/components/ui";
-import { HamburgerMenuIcon } from "@radix-ui/react-icons";
+import { Icon, useDrawer } from "@/components/ui";
 import React from "react";
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
@@ -29,7 +28,7 @@ export const Header = () => {
         <div className="flex items-center gap-4">
           <ModeToggle />
           <button onClick={openMenu}>
-            <HamburgerMenuIcon width={40} height={40} />
+            <Icon name="HamburgerMenuIcon" />
           </button>
         </div>
       </div>

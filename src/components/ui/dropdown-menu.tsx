@@ -1,8 +1,8 @@
 "use client";
 
+import { Icon } from "./icon";
 import { cn } from "@/utils";
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
-import { CheckIcon, ChevronRightIcon, CircleIcon } from "@radix-ui/react-icons";
 import * as React from "react";
 
 const DropdownMenu = DropdownMenuPrimitive.Root;
@@ -33,7 +33,7 @@ const DropdownMenuSubTrigger = React.forwardRef<
     {...props}
   >
     {children}
-    <ChevronRightIcon />
+    <Icon name="ChevronRightIcon" />
   </DropdownMenuPrimitive.SubTrigger>
 ));
 DropdownMenuSubTrigger.displayName =
@@ -106,7 +106,7 @@ const DropdownMenuCheckboxItem = React.forwardRef<
   >
     <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <DropdownMenuPrimitive.ItemIndicator>
-        <CheckIcon />
+        <Icon name="CheckIcon" />
       </DropdownMenuPrimitive.ItemIndicator>
     </span>
     {children}
@@ -129,7 +129,7 @@ const DropdownMenuRadioItem = React.forwardRef<
   >
     <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <DropdownMenuPrimitive.ItemIndicator>
-        <CircleIcon />
+        <Icon name="CircleIcon" />
       </DropdownMenuPrimitive.ItemIndicator>
     </span>
     {children}

@@ -8,9 +8,9 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  Icon,
 } from "@/components/ui";
 import { travelCityNameState, travelPolaroidState } from "@/recoils";
-import { Cross1Icon } from "@radix-ui/react-icons";
 import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import Autoplay from "embla-carousel-autoplay";
@@ -57,10 +57,9 @@ export const Tab3D = () => {
             <CarouselPrevious />
             <CarouselNext />
           </Carousel>
-          <Cross1Icon
+          <Icon
+            name="Cross1Icon"
             onClick={() => setPolaroidOpen(false)}
-            width={30}
-            height={30}
             className="absolute top-8 right-8"
           />
         </div>

@@ -1,8 +1,8 @@
 "use client";
 
+import { Icon } from "./icon";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/utils";
-import { ArrowLeftIcon, ArrowRightIcon } from "@radix-ui/react-icons";
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react";
@@ -215,7 +215,7 @@ const CarouselPrevious = React.forwardRef<
       onClick={scrollPrev}
       {...props}
     >
-      <ArrowLeftIcon />
+      <Icon name="ArrowLeftIcon" />
       <span className="sr-only">Previous slide</span>
     </Button>
   );
@@ -244,7 +244,7 @@ const CarouselNext = React.forwardRef<
       onClick={scrollNext}
       {...props}
     >
-      <ArrowRightIcon />
+      <Icon name="ArrowRightIcon" />
       <span className="sr-only">Next slide</span>
     </Button>
   );
