@@ -17,7 +17,11 @@ import { Canvas } from "@react-three/fiber";
 import Autoplay from "embla-carousel-autoplay";
 import { useRecoilState, useRecoilValue } from "recoil";
 
-export const Tab3D = ({ setSelectedTab }: { setSelectedTab }) => {
+export const Tab3D = ({
+  setSelectedTab,
+}: {
+  setSelectedTab: React.Dispatch<React.SetStateAction<string>>;
+}) => {
   const [polaroidOpen, setPolaroidOpen] = useRecoilState(travelPolaroidState);
   const cityName = useRecoilValue(travelCityNameState);
 
@@ -77,7 +81,9 @@ export const Tab3D = ({ setSelectedTab }: { setSelectedTab }) => {
         </div>
         <div className="flex flex-col items-center gap-2 md:hidden">
           <div>3D is only for PC or some tablets, please move to 2D</div>
-          <Button className="w-32">Go to 2D</Button>
+          <Button className="w-32" onClick={() => setSelectedTab("2D")}>
+            Go to 2D
+          </Button>
         </div>
       </div>
     </div>
