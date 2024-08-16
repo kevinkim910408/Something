@@ -1,17 +1,22 @@
 import { animated, useSpring } from "@react-spring/web";
 
-export const FadeInOut = ({
+export const FadeIn = ({
   isVisible,
   children,
+  className,
 }: {
   isVisible: boolean;
   children: React.ReactNode;
+  className?: string;
 }) => {
   const styles = useSpring({
     opacity: isVisible ? 1 : 0,
-    transform: isVisible ? "translateY(0)" : "translateY(24px)",
-    config: { tension: 220, friction: 120 },
+    y: isVisible ? 0 : 24,
   });
 
-  return <animated.div style={styles}>{children}</animated.div>;
+  return (
+    <animated.div style={styles} className={className}>
+      {children}
+    </animated.div>
+  );
 };
