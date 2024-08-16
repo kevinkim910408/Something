@@ -3,6 +3,7 @@
 import { EarthCanvas, FixedLight, Polaroid } from ".";
 import { FadeIn } from "@/components/animation";
 import {
+  Button,
   Carousel,
   CarouselContent,
   CarouselItem,
@@ -16,15 +17,18 @@ import { Canvas } from "@react-three/fiber";
 import Autoplay from "embla-carousel-autoplay";
 import { useRecoilState, useRecoilValue } from "recoil";
 
-export const Tab3D = () => {
+export const Tab3D = ({ setSelectedTab }: { setSelectedTab }) => {
   const [polaroidOpen, setPolaroidOpen] = useRecoilState(travelPolaroidState);
   const cityName = useRecoilValue(travelCityNameState);
 
   return (
     <div className="flex flex-col items-center w-full">
-      <FadeIn isVisible={polaroidOpen} className="flex justify-center ">
+      <FadeIn
+        isVisible={polaroidOpen}
+        className={`flex justify-center relative ${polaroidOpen ? "z-10" : ""}`}
+      >
         <div
-          className={`relative flex flex-col justify-center items-center w-11/12 ${polaroidOpen ? "h-96" : ""}`}
+          className={`absolute flex flex-col justify-center items-center w-[700px] h-96 bg-white dark:bg-black `}
         >
           {cityName}
           <Carousel
@@ -41,10 +45,7 @@ export const Tab3D = () => {
           >
             <CarouselContent>
               {Array.from({ length: 10 }).map((_, index) => (
-                <CarouselItem
-                  key={index}
-                  className="md:basis-1/2 lg:basis-1/3 2xl:basis-1/5"
-                >
+                <CarouselItem key={index} className="basis-1/2">
                   <div className="p-1">
                     <Polaroid
                       caption="Taco"
@@ -64,12 +65,20 @@ export const Tab3D = () => {
           />
         </div>
       </FadeIn>
-      <div className="w-[900px] h-[900px] flex justify-center">
-        <Canvas camera={{ fov: 25, near: 0.1, far: 100, position: [1, 4, 4] }}>
-          <FixedLight />
-          <EarthCanvas />
-          <OrbitControls enableZoom={false} />
-        </Canvas>
+      <div className="flex justify-center">
+        <div className="hidden md:block w-[850px] h-[850px] ">
+          <Canvas
+            camera={{ fov: 25, near: 0.1, far: 100, position: [1, 4, 4] }}
+          >
+            <FixedLight />
+            <EarthCanvas />
+            <OrbitControls enableZoom={false} />
+          </Canvas>
+        </div>
+        <div className="flex flex-col items-center gap-2 md:hidden">
+          <div>3D is only for PC or some tablets, please move to 2D</div>
+          <Button className="w-32">Go to 2D</Button>
+        </div>
       </div>
     </div>
   );

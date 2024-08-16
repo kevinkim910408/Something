@@ -49,7 +49,7 @@ export const Pins = ({ radius }: { radius: number }) => {
           radius,
         );
         const isHovered = index === hoveredIndex;
-        const color = isHovered ? 0xff00ff : 0x000000;
+        const color = isHovered ? 0xff00ff : 0xf9cb9c;
         const pinClone = pin.clone();
 
         pinClone.traverse((obj: any) => {

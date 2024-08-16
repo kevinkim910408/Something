@@ -25,7 +25,7 @@ export default function Home() {
           </TabsContent>
         ) : (
           <TabsContent value="3d">
-            <Tab3D />
+            <Tab3D setSelectedTab={setSelectedTab} />
           </TabsContent>
         )}
       </Tabs>
