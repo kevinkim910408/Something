@@ -33,8 +33,8 @@ export const Tab3D = ({
       <Dialog open={polaroidOpen} onOpenChange={setPolaroidOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>{cityName}</DialogTitle>
-            <DialogDescription className="flex justify-center">
+            <DialogTitle className="text-center py-4">{cityName}</DialogTitle>
+            <div className="flex justify-center">
               <Carousel
                 className="w-11/12 max-w-7xl"
                 opts={{
@@ -60,7 +60,7 @@ export const Tab3D = ({
                 <CarouselPrevious />
                 <CarouselNext />
               </Carousel>
-            </DialogDescription>
+            </div>
           </DialogHeader>
         </DialogContent>
       </Dialog>
