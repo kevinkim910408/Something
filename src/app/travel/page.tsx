@@ -4,7 +4,7 @@ import { Tab2D, Tab3D } from "./_components";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui";
 import { useState } from "react";
 
-export default function Home() {
+export default function Travel() {
   const [selectedTab, setSelectedTab] = useState("2d");
   return (
     <>

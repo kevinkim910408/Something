@@ -1,4 +1,5 @@
-import { Card, CardContent } from "@/components/ui";
+import { Card } from "@/components/ui";
+import Image from "next/image";
 import React from "react";
 
 interface PolaroidProps {
@@ -8,8 +9,8 @@ interface PolaroidProps {
 
 export const Polaroid = ({ imageUrl, caption }: PolaroidProps) => {
   return (
-    <Card className="flex flex-col items-center gap-4 m-4 p-4 bg-white shadow-lg">
-      <img src={imageUrl} alt={caption} className="max-w-full h-auto" />
+    <Card className="flex flex-col items-center gap-4 shadow-lg">
+      <Image src={imageUrl} alt={caption} width={400} height={300} />
       <div className="text-lg font-bold">{caption}</div>
     </Card>
   );
