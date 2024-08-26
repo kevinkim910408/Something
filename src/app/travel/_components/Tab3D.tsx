@@ -10,10 +10,10 @@ import {
   CarouselPrevious,
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui";
+import { TRAVEL_CONST } from "@/const";
 import { travelCityNameState, travelPolaroidState } from "@/recoils";
 import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
@@ -76,7 +76,10 @@ export const Tab3D = ({
         </div>
         <div className="flex flex-col items-center gap-2 md:hidden">
           <div>3D is only for PC or some tablets, please move to 2D</div>
-          <Button className="w-32" onClick={() => setSelectedTab("2D")}>
+          <Button
+            className="w-32"
+            onClick={() => setSelectedTab(TRAVEL_CONST["2D"])}
+          >
             Go to 2D
           </Button>
         </div>
