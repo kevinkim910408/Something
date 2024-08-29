@@ -29,4 +29,9 @@ export const navigation = [
     title: "Travel",
     name: "travel",
   },
+  {
+    to: "/setting",
+    title: "Setting",
+    name: "setting",
+  },
 ];

@@ -11,6 +11,9 @@ const config = {
           DEFAULT: "var(--color-secondary) ",
         },
       },
+      height: {
+        content: "calc(100vh - 100px)",
+      },
       minHeight: {
         content: "calc(100vh - 100px)",
       },

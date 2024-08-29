@@ -7,9 +7,9 @@ import React from "react";
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex flex-col justify-between items-center">
+    <div className="flex flex-col justify-between items-center min-h-screen">
       <Header />
-      <div className="min-h-content max-w-[100rem] w-11/12">{children}</div>
+      <div className="max-w-[100rem] w-11/12 min-h-content">{children}</div>
       <Footer />
     </div>
   );

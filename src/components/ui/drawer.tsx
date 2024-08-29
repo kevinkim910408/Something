@@ -54,7 +54,7 @@ export function Drawer({
           <div className="fixed inset-0 bg-red" />
         </Transition.Child>
 
-        <div className="fixed inset-0 bg-red-black bg-opacity-25">
+        <div className="fixed inset-0 bg-black bg-opacity-75">
           <div className="absolute inset-0 overflow-hidden">
             <div
               className={`fixed inset-y-0 flex max-w-full ${
