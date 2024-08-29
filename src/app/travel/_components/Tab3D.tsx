@@ -18,15 +18,14 @@ import { travelCityNameState, travelPolaroidState } from "@/recoils";
 import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import Autoplay from "embla-carousel-autoplay";
+import { useRouter } from "next/navigation";
 import { useRecoilState, useRecoilValue } from "recoil";
 
-export const Tab3D = ({
-  setSelectedTab,
-}: {
-  setSelectedTab: React.Dispatch<React.SetStateAction<string>>;
-}) => {
+export const Tab3D = () => {
   const [polaroidOpen, setPolaroidOpen] = useRecoilState(travelPolaroidState);
   const cityName = useRecoilValue(travelCityNameState);
+
+  const router = useRouter();
 
   return (
     <div className="flex flex-col items-center w-full">
@@ -78,7 +77,7 @@ export const Tab3D = ({
           <div>3D is only for PC or some tablets, please move to 2D</div>
           <Button
             className="w-32"
-            onClick={() => setSelectedTab(TRAVEL_CONST["2D"])}
+            onClick={() => router.push(TRAVEL_CONST["2D"])}
           >
             Go to 2D
           </Button>

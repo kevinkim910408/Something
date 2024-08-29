@@ -15,7 +15,7 @@ import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 export const Pins = ({ radius }: { radius: number }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  const pin = useLoader(OBJLoader, "./starPin.obj");
+  const pin = useLoader(OBJLoader, "/assets/pin.obj");
 
   const setPolaroidOpen = useSetRecoilState(travelPolaroidState);
   const setCityName = useSetRecoilState(travelCityNameState);
@@ -53,6 +53,7 @@ export const Pins = ({ radius }: { radius: number }) => {
         const pinClone = pin.clone();
 
         pinClone.traverse((obj: any) => {
+          console.log(obj.isMesh);
           if (obj.isMesh) {
             obj.material = cloneMaterial(obj.material);
             if (Array.isArray(obj.material)) {
