@@ -6,5 +6,8 @@ export * from "./dropdown-menu";
 export * from "./drawer";
 export * from "./tabs";
 export * from "./Text";
+export * from "./radio-group";
+export * from "./select";
+export * from "./input";
 
 export { Icon } from "./icon";

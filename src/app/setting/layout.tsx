@@ -52,7 +52,7 @@ const SettingHeader = () => {
         {/* Battery Icon */}
         <div className="flex items-center space-x-1">
           <div className="w-6 h-3.5 border-2 border-black relative">
-            <div className="w-4/5 h-full bg-black"></div>
+            <div className="w-4/5 h-full bg-green-500"></div>
           </div>
           <div className="w-1 h-2 bg-black"></div>
         </div>

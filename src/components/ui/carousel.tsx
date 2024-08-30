@@ -1,7 +1,7 @@
 "use client";
 
 import { Icon } from "./icon";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui";
 import { cn } from "@/utils";
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
