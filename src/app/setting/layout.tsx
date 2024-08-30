@@ -1,18 +1,19 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+
 export default function SettingLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const currentTime = new Date().toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
   return (
     <div className="flex items-center justify-center min-h-content">
       <div className="max-w-[1024px] h-content w-11/12 border-8 border-black rounded-[36px] bg-cover bg-center relative overflow-hidden shadow-[0px_0px_10px_0px_#718096]">
-        <SettingHeader currentTime={currentTime} />
+        <SettingHeader />
 
-        <div className="flex items-center justify-center h-[calc(100%-104px)]">
+        <div className="h-[calc(100%-104px)] overflow-y-scroll p-4 ">
           {children}
         </div>
 
@@ -22,7 +23,17 @@ export default function SettingLayout({
   );
 }
 
-const SettingHeader = ({ currentTime }: { currentTime: string }) => {
+const SettingHeader = () => {
+  const [currentTime, setCurrentTime] = useState<string>("");
+
+  useEffect(() => {
+    const formattedTime = new Date().toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    setCurrentTime(formattedTime);
+  }, []);
+
   return (
     <div className="flex justify-between items-center px-4 h-6 bg-gray-300">
       {/* Time */}
@@ -51,9 +62,18 @@ const SettingHeader = ({ currentTime }: { currentTime: string }) => {
 };
 
 const SettingFooter = () => {
+  const router = useRouter();
+
+  const handleGoHome = () => {
+    router.push("/setting");
+  };
+
   return (
     <div className="flex justify-center items-center h-20 bg-black">
-      <button className="w-14 h-14 bg-gray-400 rounded-full shadow-md flex items-center justify-center">
+      <button
+        className="w-14 h-14 bg-gray-400 rounded-full shadow-md flex items-center justify-center"
+        onClick={handleGoHome}
+      >
         <div className="w-8 h-8 bg-white rounded-full" />
       </button>
     </div>

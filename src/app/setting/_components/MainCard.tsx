@@ -29,11 +29,11 @@ const MainCard: React.FC<MainCardProps> = ({
   return (
     <a
       href={link}
-      className={`relative block max-w-xs p-6 bg-gradient-to-bl ${randomGradient} rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105 ${className}`}
+      className={`relative flex gap-4 items-center justify-center bg-gradient-to-bl ${randomGradient} rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105 ${className}`}
     >
-      <div className="absolute top-4 left-4 text-white text-3xl">{icon}</div>
-      <div className="mt-16">
-        <h2 className="text-xl font-bold text-white mb-2">{title}</h2>
+      <div className="text-white text-3xl">{icon}</div>
+      <div className="flex flex-col justify-center gap-2">
+        <h2 className="text-xl font-bold text-white">{title}</h2>
         <p className="text-white opacity-75">{desc}</p>
       </div>
     </a>
