@@ -11,6 +11,7 @@ const firebaseConfig = {
   storageBucket: `${process.env.NEXT_PUBLIC_STORAGEBUCKET}`,
   messagingSenderId: `${process.env.NEXT_PUBLIC_MESSAGINGSENDERID}`,
   appId: `${process.env.NEXT_PUBLIC_APPID}`,
+  measurementId: `${process.env.NEXT_PUBLIC_MESUREMENTID}`,
 };
 
 const app = initializeApp(firebaseConfig);

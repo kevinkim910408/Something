@@ -9,5 +9,7 @@ export * from "./Text";
 export * from "./radio-group";
 export * from "./select";
 export * from "./input";
+export * from "./label";
+export * from "./form";
 
 export { Icon } from "./icon";
