@@ -1,66 +1,42 @@
+"use client";
+
 import MainCard from "./_components/MainCard";
-import { MagicWandIcon, UploadIcon } from "@radix-ui/react-icons";
+import { cards } from "./data/mainCard";
+import { cn } from "@/utils";
+import { motion } from "framer-motion";
 import React from "react";
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.05,
+    },
+  }),
+};
 
 export default function Setting() {
   return (
     <div className="grid grid-cols-2 gap-4 w-full sm:grid-cols-3">
-      <MainCard
-        title="Upload"
-        link="setting/upload"
-        desc="Upload to firebase."
-        icon={<UploadIcon width={40} height={40} />}
-        className="h-40 bg-gradient-to-r from-orange-500 to-pink-500 col-span-2 sm:col-span-3"
-      />
-      <MainCard
-        title="Permissions"
-        link="setting/permissions"
-        desc="Manage Permissions"
-        icon={<MagicWandIcon width={40} height={40} />}
-        className="h-40 bg-gradient-to-r from-pink-500 to-purple-500 col-span-2 "
-      />
-      <MainCard
-        title="Modern Life"
-        link="/modern-life"
-        desc="117 Spots"
-        icon={<></>}
-        className="h-40 bg-gradient-to-r from-purple-500 to-indigo-500 col-span-2 sm:col-span-1"
-      />
-      <MainCard
-        title="Popularity"
-        link="/popularity"
-        desc="102 Spots"
-        icon={<></>}
-        className="h-40 bg-gradient-to-r from-indigo-500 to-blue-500 col-span-2 sm:col-span-1"
-      />
-      <MainCard
-        title="Sun & Sand"
-        link="/sun-and-sand"
-        desc="147 Spots"
-        icon={<></>}
-        className="h-40 bg-gradient-to-r from-blue-500 to-purple-500 col-span-2 "
-      />
-      <MainCard
-        title="Popularity"
-        link="/popularity"
-        desc="102 Spots"
-        icon={<></>}
-        className="h-40 bg-gradient-to-r from-indigo-500 to-blue-500 col-span-2 sm:col-span-1"
-      />
-      <MainCard
-        title="Popularity"
-        link="/popularity"
-        desc="102 Spots"
-        icon={<></>}
-        className="h-40 bg-gradient-to-r from-indigo-500 to-blue-500 col-span-2 sm:col-span-1"
-      />
-      <MainCard
-        title="Popularity"
-        link="/popularity"
-        desc="102 Spots"
-        icon={<></>}
-        className="h-40 bg-gradient-to-r from-indigo-500 to-blue-500 col-span-2 sm:col-span-1"
-      />
+      {cards.map((card, index) => (
+        <motion.div
+          key={index}
+          custom={index}
+          initial="hidden"
+          animate="visible"
+          variants={cardVariants}
+          className={cn("rounded-xl shadow-lg " + card.className)}
+        >
+          <MainCard
+            title={card.title}
+            link={card.link}
+            desc={card.desc}
+            icon={card.icon}
+          />
+        </motion.div>
+      ))}
     </div>
   );
 }

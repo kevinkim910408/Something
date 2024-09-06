@@ -27,7 +27,7 @@ import { z } from "zod";
 const formSchema = z.object({
   folderTitle: z.string(),
   subfolderTitle: z.string(),
-  createdAt: z.string(),
+  createdAt: z.date(),
   desc: z.string(),
 });
 
@@ -41,7 +41,7 @@ export default function SettingUpload() {
     defaultValues: {
       folderTitle: "",
       subfolderTitle: "",
-      createdAt: "",
+      createdAt: new Date(),
       desc: "",
     },
   });
@@ -65,7 +65,7 @@ export default function SettingUpload() {
         files: [],
         folderTitle,
         subfolderTitle,
-        createdAt: new Date().toISOString(),
+        createdAt: new Date(),
         desc: values.desc || "",
       };
 
