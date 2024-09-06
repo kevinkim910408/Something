@@ -2,8 +2,6 @@
 
 import {
   Input,
-  RadioGroup,
-  RadioGroupItem,
   Select,
   SelectContent,
   SelectGroup,
@@ -20,7 +18,7 @@ import {
 } from "@/components/ui";
 import { db, storage } from "@/config";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { collection, doc, setDoc } from "firebase/firestore";
+import { collection, doc, getDocs, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -29,7 +27,6 @@ import { z } from "zod";
 const formSchema = z.object({
   folderTitle: z.string(),
   subfolderTitle: z.string(),
-  fileTitle: z.string(),
   createdAt: z.string(),
   desc: z.string(),
 });
@@ -37,7 +34,6 @@ const formSchema = z.object({
 export type UploadType = z.infer<typeof formSchema> & { files: string[] };
 
 export default function SettingUpload() {
-  const [uploadType, setUploadType] = useState<string>("multiple");
   const [files, setFiles] = useState<File[] | File | null>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -45,7 +41,6 @@ export default function SettingUpload() {
     defaultValues: {
       folderTitle: "",
       subfolderTitle: "",
-      fileTitle: "",
       createdAt: "",
       desc: "",
     },
@@ -54,55 +49,63 @@ export default function SettingUpload() {
   const handleFiles = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = event.target.files;
     if (selectedFiles) {
-      setFiles(
-        uploadType === "multiple"
-          ? Array.from(selectedFiles)
-          : selectedFiles[0],
-      );
+      setFiles(Array.from(selectedFiles));
     }
   };
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const dbCollection = collection(
-      db,
-      `${values.folderTitle.toLocaleLowerCase()}`,
-    );
-    const data: UploadType = {
-      files: [],
-      folderTitle: "",
-      subfolderTitle: "",
-      fileTitle: "",
-      createdAt: "",
-      desc: "",
-    };
+    try {
+      const folderTitle = values.folderTitle.toLocaleLowerCase();
+      const subfolderTitle = values.subfolderTitle.toLocaleLowerCase();
 
-    if (files) {
-      // Upload image to storage and get url
+      const docRef = doc(db, folderTitle, subfolderTitle);
+      const subCollectionRef = collection(docRef, "files");
+
+      const data: UploadType = {
+        files: [],
+        folderTitle,
+        subfolderTitle,
+        createdAt: new Date().toISOString(),
+        desc: values.desc || "",
+      };
+
+      if (!files) {
+        throw new Error("No files selected for upload.");
+      }
+
       const filesArray = Array.isArray(files) ? files : [files];
+      const subCollectionSnapshot = await getDocs(subCollectionRef);
+      const currentItemCount = subCollectionSnapshot.size;
+
       for (let i = 0; i < filesArray.length; i++) {
         const file = filesArray[i];
-        const storageRef = ref(
-          storage,
-          `${values.folderTitle.toLocaleLowerCase()}/${values.subfolderTitle.toLocaleLowerCase()}/${values.fileTitle}${i}`,
-        );
+        const itemIndex = currentItemCount + i;
+
+        const storagePath = `${folderTitle}/${subfolderTitle}/${subfolderTitle}${itemIndex}`;
+        const storageRef = ref(storage, storagePath);
+
         try {
           await uploadBytes(storageRef, file);
           const fileUrl = await getDownloadURL(storageRef);
           data.files.push(fileUrl);
         } catch (error) {
-          console.error(`File Upload Error: ${i + 1}th :`, error);
+          console.error(`File Upload Error: ${i + 1}th file`, error);
+          throw new Error(`Failed to upload ${i + 1}th file.`);
         }
 
-        // await setDoc(
-        //   doc(
-        //     dbCollection,
-        //     `${values.subfolderTitle.toLocaleLowerCase()}/${values.fileTitle}${i}`,
-        //   ),
-        //   data,
-        // );
+        const fileDocRef = doc(
+          subCollectionRef,
+          `${subfolderTitle}${itemIndex}`,
+        );
+        await setDoc(fileDocRef, data);
       }
 
-      console.log(data);
+      alert("Upload successful!");
+    } catch (error: any) {
+      console.error("Error during file upload process:", error);
+      alert(
+        `Error: ${error.message || "An unexpected error occurred during the upload process."}`,
+      );
     }
   };
 
@@ -111,28 +114,18 @@ export default function SettingUpload() {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           {/* Image File */}
-          <div className="flex flex-col gap-4">
-            <RadioGroup
-              defaultValue="multiple"
-              className="flex items-center gap-4"
-              onValueChange={setUploadType}
-            >
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="multiple" id="multiple" />
-                <label htmlFor="multiple">Upload Multiple Images</label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="single" id="single" />
-                <label htmlFor="single">Upload Single Image</label>
-              </div>
-            </RadioGroup>
-            <Input
-              multiple={uploadType === "multiple"}
-              type="file"
-              accept="image/*"
-              onChange={handleFiles}
-            />
-          </div>
+          <FormItem>
+            <FormLabel>Image Files</FormLabel>
+            <FormControl>
+              <Input
+                multiple
+                type="file"
+                accept="image/*"
+                onChange={handleFiles}
+              />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
 
           {/* Storage Name - folder title  */}
           <FormField
@@ -169,21 +162,6 @@ export default function SettingUpload() {
                 <FormLabel>Sub folder title</FormLabel>
                 <FormControl>
                   <Input placeholder="Sub folder name" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          {/* File Title */}
-          <FormField
-            control={form.control}
-            name="fileTitle"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>File title</FormLabel>
-                <FormControl>
-                  <Input placeholder="File name" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

@@ -53,7 +53,6 @@ export const Pins = ({ radius }: { radius: number }) => {
         const pinClone = pin.clone();
 
         pinClone.traverse((obj: any) => {
-          console.log(obj.isMesh);
           if (obj.isMesh) {
             obj.material = cloneMaterial(obj.material);
             if (Array.isArray(obj.material)) {
