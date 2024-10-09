@@ -65,13 +65,13 @@ const SettingFooter = () => {
   const router = useRouter();
 
   const handleGoHome = () => {
-    router.push("/setting");
+    router.back();
   };
 
   return (
     <div className="flex justify-center items-center h-20 bg-black">
       <button
-        className="w-14 h-14 bg-gray-400 rounded-full shadow-md flex items-center justify-center"
+        className="w-14 h-14 bg-gray-400 rounded-full shadow-md flex items-center justify-center hover:opacity-80 active:opacity-60"
         onClick={handleGoHome}
       >
         <div className="w-8 h-8 bg-white rounded-full" />

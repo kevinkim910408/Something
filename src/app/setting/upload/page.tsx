@@ -1,11 +1,9 @@
 "use client";
 
+import { MainfolderSelect } from "../_components/FolderSelect";
 import {
   Input,
   Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
   SelectTrigger,
   SelectValue,
   Form,
@@ -18,10 +16,11 @@ import {
 } from "@/components/ui";
 import { db, storage } from "@/config";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { collection, doc, getDocs, setDoc } from "firebase/firestore";
+import { collection, doc, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { v4 as uuidv4 } from "uuid";
 import { z } from "zod";
 
 const formSchema = z.object({
@@ -29,9 +28,10 @@ const formSchema = z.object({
   subfolderTitle: z.string(),
   createdAt: z.date(),
   desc: z.string(),
+  subCollection: z.string(),
 });
 
-export type UploadType = z.infer<typeof formSchema> & { files: string[] };
+export type UploadType = z.infer<typeof formSchema>;
 
 export default function SettingUpload() {
   const [files, setFiles] = useState<File[] | File | null>(null);
@@ -43,6 +43,7 @@ export default function SettingUpload() {
       subfolderTitle: "",
       createdAt: new Date(),
       desc: "",
+      subCollection: "files",
     },
   });
 
@@ -61,46 +62,37 @@ export default function SettingUpload() {
       const docRef = doc(db, folderTitle, subfolderTitle);
       const subCollectionRef = collection(docRef, "files");
 
-      const data: UploadType = {
-        files: [],
-        folderTitle,
-        subfolderTitle,
-        createdAt: new Date(),
-        desc: values.desc || "",
-      };
-
       if (!files) {
         throw new Error("No files selected for upload.");
       }
 
       const filesArray = Array.isArray(files) ? files : [files];
-      const subCollectionSnapshot = await getDocs(subCollectionRef);
-      const currentItemCount = subCollectionSnapshot.size;
 
       for (let i = 0; i < filesArray.length; i++) {
         const file = filesArray[i];
-        const itemIndex = currentItemCount + i;
 
-        const storagePath = `${folderTitle}/${subfolderTitle}/${subfolderTitle}${itemIndex}`;
+        const storagePath = `${folderTitle}/${subfolderTitle}/${subfolderTitle}${uuidv4()}`;
         const storageRef = ref(storage, storagePath);
 
-        try {
-          await uploadBytes(storageRef, file);
-          const fileUrl = await getDownloadURL(storageRef);
-          data.files.push(fileUrl);
-        } catch (error) {
-          console.error(`File Upload Error: ${i + 1}th file`, error);
-          throw new Error(`Failed to upload ${i + 1}th file.`);
-        }
+        await uploadBytes(storageRef, file);
+        const fileUrl = await getDownloadURL(storageRef);
 
         const fileDocRef = doc(
           subCollectionRef,
-          `${subfolderTitle}${itemIndex}`,
+          `${subfolderTitle}${uuidv4()}`,
         );
-        await setDoc(fileDocRef, data);
-      }
+        const fileData = {
+          folderTitle,
+          subfolderTitle,
+          createdAt: new Date(),
+          desc: values.desc || "",
+          fileUrl,
+          subCollection: "files",
+        };
 
-      alert("Upload successful!");
+        await setDoc(fileDocRef, fileData);
+        alert("Upload successful!");
+      }
     } catch (error: any) {
       console.error("Error during file upload process:", error);
       alert(
@@ -140,13 +132,7 @@ export default function SettingUpload() {
                       <SelectValue placeholder="Choose title" />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectItem value="game">Game</SelectItem>
-                      <SelectItem value="movie">Movie</SelectItem>
-                      <SelectItem value="travel">Travel</SelectItem>
-                    </SelectGroup>
-                  </SelectContent>
+                  <MainfolderSelect />
                 </Select>
                 <FormMessage />
               </FormItem>

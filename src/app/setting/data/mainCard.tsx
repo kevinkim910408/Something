@@ -1,4 +1,9 @@
-import { MagicWandIcon, UploadIcon } from "@radix-ui/react-icons";
+import {
+  KeyboardIcon,
+  MagicWandIcon,
+  ScissorsIcon,
+  UploadIcon,
+} from "@radix-ui/react-icons";
 
 export const cards = [
   {
@@ -10,9 +15,9 @@ export const cards = [
       "h-40 bg-gradient-to-r from-orange-500 to-pink-500 col-span-2 sm:col-span-3",
   },
   {
-    title: "Sub Folder Manager",
-    link: "setting/subfolders",
-    desc: "Manage sub folder contents for dropdown.",
+    title: "Photo Info Edit Manager",
+    link: "setting/photoInfoEdit",
+    desc: "Manage Photo Information.",
     icon: <MagicWandIcon width={40} height={40} />,
     className: "h-40 bg-gradient-to-r from-pink-500 to-purple-500 col-span-2",
   },
@@ -40,20 +45,20 @@ export const cards = [
     className: "h-40 bg-gradient-to-r from-blue-500 to-purple-500 col-span-2",
   },
   {
-    title: "Popularity",
-    link: "/popularity",
-    desc: "102 Spots",
-    icon: <></>,
+    title: "Folder Manager - Add",
+    link: "setting/folderAdd",
+    desc: "Manage adding folders.",
+    icon: <KeyboardIcon width={40} height={40} />,
     className:
-      "h-40 bg-gradient-to-r from-indigo-500 to-blue-500 col-span-2 sm:col-span-1",
+      "h-40 bg-gradient-to-r from-purple-500 to-indigo-500 col-span-2 sm:col-span-1",
   },
   {
-    title: "Popularity",
-    link: "/popularity",
-    desc: "102 Spots",
-    icon: <></>,
+    title: "Folder Manager - Edit",
+    link: "setting/folderEdit",
+    desc: "Manage editing folders.",
+    icon: <ScissorsIcon width={40} height={40} />,
     className:
-      "h-40 bg-gradient-to-r from-indigo-500 to-blue-500 col-span-2 sm:col-span-1",
+      "h-40 bg-gradient-to-r from-purple-500 to-indigo-500 col-span-2 sm:col-span-1",
   },
   {
     title: "Popularity",
