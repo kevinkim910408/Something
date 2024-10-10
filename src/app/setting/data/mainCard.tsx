@@ -45,9 +45,9 @@ export const cards = [
     className: "h-40 bg-gradient-to-r from-blue-500 to-purple-500 col-span-2",
   },
   {
-    title: "Folder Manager - Add",
-    link: "setting/folderAdd",
-    desc: "Manage adding folders.",
+    title: "Folder Manager",
+    link: "setting/folderManager",
+    desc: "Manage folders.",
     icon: <KeyboardIcon width={40} height={40} />,
     className:
       "h-40 bg-gradient-to-r from-purple-500 to-indigo-500 col-span-2 sm:col-span-1",
